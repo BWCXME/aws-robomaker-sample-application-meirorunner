@@ -21,6 +21,7 @@ source /opt/ros/$ROS_DISTRO/setup.sh
 rosdep update
 
 pip3 install -U awscli
+pip3 install -U setuptools
 pip3 install -U colcon-common-extensions colcon-ros-bundle colcon-bundle
 pip3 install boto3
 pip3 install colorama
