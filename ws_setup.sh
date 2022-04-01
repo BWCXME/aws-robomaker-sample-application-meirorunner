@@ -23,6 +23,7 @@ rosdep update
 pip3 install -U awscli
 pip3 install -U colcon-common-extensions colcon-ros-bundle colcon-bundle
 pip3 install boto3
+pip3 install colorama
 
 STACK_NAME=meirorunner`echo $C9_USER|tr -d [\.\\-=_@]` 
 
