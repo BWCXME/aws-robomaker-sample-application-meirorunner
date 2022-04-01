@@ -45,6 +45,8 @@ SETTINGS = ["aws_region",
 APPNAME_BASE="meiro_runner_"
 
 CFStackName = "" # Specify stack name through command parameter
+BucketName = ""
+IamRole = ""
 
 class Setup:
     def __init__(self):
@@ -164,50 +166,52 @@ class Setup:
         return result
 
     def setup_bucket_name(self):
-        result = None
-        try:
-            cf = boto3.client('cloudformation')
-            stacks = cf.describe_stacks(StackName=CFStackName)
+        return BucketName
+        # result = None
+        # try:
+        #     cf = boto3.client('cloudformation')
+        #     stacks = cf.describe_stacks(StackName=CFStackName)
             
-            for stack in stacks["Stacks"]:
-                outputs = stack["Outputs"]
-                for output in outputs:
-                    print(output["OutputKey"] + ":" + output["OutputValue"])
-                    if output["OutputKey"] == "BucketName":
-                        result = output["OutputValue"]
+        #     for stack in stacks["Stacks"]:
+        #         outputs = stack["Outputs"]
+        #         for output in outputs:
+        #             print(output["OutputKey"] + ":" + output["OutputValue"])
+        #             if output["OutputKey"] == "BucketName":
+        #                 result = output["OutputValue"]
 
-        except Exception as e:
-            errlog("Exception : %s" % str(e))
-            return None
+        # except Exception as e:
+        #     errlog("Exception : %s" % str(e))
+        #     return None
 
-        if result == None:
-            errlog("BucketName couldn't be found in the CloudFormation stack")
-            return None
+        # if result == None:
+        #     errlog("BucketName couldn't be found in the CloudFormation stack")
+        #     return None
 
-        return result
+        # return result
         
     def setup_iam_role(self):
-        result = None
-        try:
-            cf = boto3.client('cloudformation')
-            stacks = cf.describe_stacks(StackName=CFStackName)
+        return IamRole
+        # result = None
+        # try:
+        #     cf = boto3.client('cloudformation')
+        #     stacks = cf.describe_stacks(StackName=CFStackName)
             
-            for stack in stacks["Stacks"]:
-                outputs = stack["Outputs"]
-                for output in outputs:
-                    print(output["OutputKey"] + ":" + output["OutputValue"])
-                    if output["OutputKey"] == "IAMRole":
-                        result = output["OutputValue"]
+        #     for stack in stacks["Stacks"]:
+        #         outputs = stack["Outputs"]
+        #         for output in outputs:
+        #             print(output["OutputKey"] + ":" + output["OutputValue"])
+        #             if output["OutputKey"] == "IAMRole":
+        #                 result = output["OutputValue"]
 
-        except Exception as e:
-            errlog("Exception : %s" % str(e))
-            return None
+        # except Exception as e:
+        #     errlog("Exception : %s" % str(e))
+        #     return None
 
-        if result == None:
-            errlog("IAMRole couldn't be found in the CloudFormation stack")
-            return None
+        # if result == None:
+        #     errlog("IAMRole couldn't be found in the CloudFormation stack")
+        #     return None
 
-        return result 
+        # return result 
     
     def setup_robomaker_settings(self):
         log("setup roboMakerSettings.json..")
@@ -394,6 +398,8 @@ def errlog(message):
 
 if __name__ == '__main__':
     CFStackName = sys.argv[1]
+    BucketName = sys.argv[2]
+    IamRole = sys.argv[3]
     setup = Setup()
     setup.entry()
 

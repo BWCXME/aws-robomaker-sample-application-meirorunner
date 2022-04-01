@@ -27,5 +27,10 @@ pip3 install boto3
 STACK_NAME=meirorunner`echo $C9_USER|tr -d [\.\\-=_@]` 
 
 export SETUPTOOLS_USE_DISTUTILS=stdlib
-aws cloudformation deploy --template-file ./cf/meirorunner.template.json --stack-name $STACK_NAME --capabilities CAPABILITY_IAM
-python3 ./ws_setup.py $STACK_NAME
+# aws cloudformation deploy --template-file ./cf/meirorunner.template.json --stack-name $STACK_NAME --capabilities CAPABILITY_IAM
+
+BUCKET_NAME = $1
+
+IAM_ROLE = $2
+
+python3 ./ws_setup.py $STACK_NAME $BUCKET_NAME $IAM_ROLE
